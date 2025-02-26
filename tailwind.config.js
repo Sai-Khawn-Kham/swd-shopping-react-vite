@@ -6,25 +6,49 @@ export default {
       "./node_modules/flowbite/**/*.js",
    ],
    theme: {
-      fontFamily: {
-         sans: ["Montserrat", "Padauk", "sans-serif"],
-      },
       extend: {
          fontFamily: {
-            heading: ["Poppins", "sans-serif"],
+            // heading: ["Poppins", "serif"],
+            // base: [],
+            // display: [],
          },
          colors: {
-            primary: "#1D4ED8", // Adding a primary color
-            secondary: {
-               light: "#4ADE80",
-               DEFAULT: "#22C55E",
-               dark: "#166534", // Nested shades for secondary
-            },
-            customGray: {
-               100: "#F3F4F6",
-               200: "#E5E7EB",
-               300: "#D1D5DB",
-            },
+            // primary: {
+            //    100: "#F3F4F6",
+            //    200: "",
+            //    300: "",
+            //    400: "",
+            //    500: "",
+            //    600: "",
+            //    700: "",
+            //    800: "",
+            //    900: "",
+            //    950: "",
+            // },
+            // secondary: {
+            //    100: "",
+            //    200: "",
+            //    300: "",
+            //    400: "",
+            //    500: "",
+            //    600: "",
+            //    700: "",
+            //    800: "",
+            //    900: "",
+            //    950: "",
+            // },
+            // accent: {
+            //    100: "",
+            //    200: "",
+            //    300: "",
+            //    400: "",
+            //    500: "",
+            //    600: "",
+            //    700: "",
+            //    800: "",
+            //    900: "",
+            //    950: "",
+            // },
          },
       },
    },
