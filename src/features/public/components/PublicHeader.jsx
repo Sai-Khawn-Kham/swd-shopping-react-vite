@@ -18,7 +18,7 @@ const PublicHeader = () => {
       setOpen(false);
    };
    return (
-      <header className="fixed bg-white w-full h-14 flex items-center">
+      <header className="fixed bg-white w-full h-20 flex items-center">
          <Container>
             <div className="flex justify-between">
                {/* logo */}

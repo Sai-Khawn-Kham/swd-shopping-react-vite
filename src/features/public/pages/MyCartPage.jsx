@@ -5,12 +5,10 @@ import CartSection from "../components/CartSection";
 
 const MyCartPage = () => {
    return (
-      <div className="grow mt-16">
-         <Container>
-            <Breadcrumb currentPageTitle="My Cart" />
-            <CartSection />
-         </Container>
-      </div>
+      <Container>
+         <Breadcrumb currentPageTitle="My Cart" />
+         <CartSection />
+      </Container>
    );
 };
 

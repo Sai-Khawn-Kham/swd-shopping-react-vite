@@ -5,12 +5,10 @@ import Container from "../components/Container";
 
 const ProductPage = () => {
    return (
-      <div className="grow mt-16">
-         <Container>
-            <CategorySection />
-            <ProductSection />
-         </Container>
-      </div>
+      <Container>
+         <CategorySection />
+         <ProductSection />
+      </Container>
    );
 };
 

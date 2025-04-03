@@ -9,7 +9,9 @@ const PublicLayout = () => {
    return (
       <div className="min-h-screen flex flex-col">
          <PublicHeader />
-         <Outlet />
+         <div className="grow mt-20">
+            <Outlet />
+         </div>
          <PublicFooter />
          <Toaster position="top-right" toastOptions={{
             // Default
