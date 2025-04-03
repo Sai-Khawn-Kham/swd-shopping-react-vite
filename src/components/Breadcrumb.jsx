@@ -4,7 +4,7 @@ import { HiChevronRight, HiMiniHome } from "react-icons/hi2";
 
 const Breadcrumb = ({ currentPageTitle, links }) => {
    return (
-      <div className="flex items-center mb-2">
+      <div className="flex items-center mb-3">
          <Link to="/" className="flex gap-1 items-center">
             <HiMiniHome />
             Home

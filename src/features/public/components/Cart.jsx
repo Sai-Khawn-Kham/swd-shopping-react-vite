@@ -18,7 +18,7 @@ const Cart = ({ cart: { id, productId, quantity } }) => {
       } else {
          Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "Are you sure to remove this product from cart",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -33,34 +33,36 @@ const Cart = ({ cart: { id, productId, quantity } }) => {
       }
    };
    return (
-      <div className="border border-black p-2 grid grid-cols-6">
-         <div className="col-span-1 my-auto mx-auto">
-            <img src={product.image} alt="" className="h-12" />
+      <div className="border border-black py-2 grid grid-cols-5">
+         <div className="flex justify-center items-center">
+            <img src={product.image} alt={product.title} className="h-12" />
          </div>
-         <div className="col-span-3">
-            <p className="mb-1 font-bold">{product.title}</p>
-            <p className="text-gray-500">Price ({product.price})</p>
+         <div className="col-span-2 px-1">
+            <p className="line-clamp-1">{product.title}</p>
+            <p className="text-gray-500">Price: ${product.price}</p>
          </div>
-         <div className="col-span-1">
-            <p className="mb-1">Quantity</p>
-            <div className="flex gap-2">
-               <button
-                  onClick={handleDecreaseQuantity}
-                  className="bg-black block text-center text-white px-1"
-               >
-                  -
-               </button>
-               <p>{quantity}</p>
-               <button
-                  onClick={handleIncreaseQuantity}
-                  className="bg-black block text-center text-white px-1"
-               >
-                  +
-               </button>
+         <div className="flex justify-center items-center px-1">
+            <div>
+               <p>Quantity</p>
+               <div className="flex gap-2">
+                  <button
+                     onClick={handleDecreaseQuantity}
+                     className="bg-black block text-center text-white px-1"
+                  >
+                     -
+                  </button>
+                  <p>{quantity}</p>
+                  <button
+                     onClick={handleIncreaseQuantity}
+                     className="bg-black block text-center text-white px-1"
+                  >
+                     +
+                  </button>
+               </div>
             </div>
          </div>
-         <div className="col-span-1">
-            <p className="text-end text-xl font-bold mt-2">{cost.toFixed(2)}</p>
+         <div className="px-1 flex justify-center items-center">
+            <p>{cost.toFixed(2)}</p>
          </div>
       </div>
    );

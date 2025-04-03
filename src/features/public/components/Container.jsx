@@ -2,11 +2,11 @@ import React from "react";
 
 const Container = ({ children, className }) => {
    return (
-      <section
-         className={`w-full md:w-[720px] lg:w-[1000px] px-7 mx-auto ${className}`}
+      <div
+         className={`w-full md:w-[700px] lg:w-[900px] mx-auto px-3 md:px-0 ${className}`}
       >
          {children}
-      </section>
+      </div>
    );
 };
 

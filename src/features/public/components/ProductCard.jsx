@@ -38,10 +38,12 @@ const ProductCard = ({
    return (
       <div
          onClick={handleOpenDetail}
-         className="border border-black p-5 flex flex-col items-start gap-3 hover:border-2"
+         className="border border-slate-400 p-3 md:p-5 flex flex-col items-start gap-3 hover:border-slate-950"
       >
-         <img src={image} className="h-40 " alt="" />
-         <p className="font-bold line-clamp-1">{title}</p>
+         <div className="w-full flex justify-center items-center">
+            <img src={image} className="h-40 " alt="" />
+         </div>
+         <p className="font-semibold line-clamp-1">{title}</p>
          <Rating rate={rate} />
          <div className="flex justify-between items-end w-full">
             <p>${price}</p>
