@@ -13,23 +13,26 @@ const PublicLayout = () => {
             <Outlet />
          </div>
          <PublicFooter />
-         <Toaster position="top-right" toastOptions={{
-            // Default
-            className: "",
-            duration: 2000,
-            style: {
-               background: "#363636",
-               color: "#fff",
-            },
-            // Default for specific types
-            success: {
+         
+         <Toaster
+            toastOptions={{
+               // Default
+               className: "",
                duration: 2000,
-               theme: {
-                  primary: "green",
-                  secondary: "black",
+               style: {
+                  background: "#363636",
+                  color: "#fff",
                },
-            },
-         }} />
+               // Default for specific types
+               success: {
+                  duration: 2000,
+                  theme: {
+                     primary: "green",
+                     secondary: "black",
+                  },
+               },
+            }}
+         />
       </div>
    );
 };

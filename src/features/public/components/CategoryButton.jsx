@@ -10,8 +10,8 @@ const CategoryButton = ({ category: { id, name, isActive } }) => {
       <button
          onClick={handleOnClick}
          className={`${
-            isActive && "bg-black text-white"
-         } border text-nowrap border-black px-3 py-1 me-2 hover:bg-gray-500`}
+            isActive && "bg-gray-700 text-gray-50"
+         } w-36 mr-3 last:mr-0 border border-gray-700 rounded text-nowrap hover:bg-gray-500`}
       >
          {name}
       </button>

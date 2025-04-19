@@ -1,65 +1,58 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { HiShoppingCart } from "react-icons/hi2";
 import Container from "./Container";
+import { Link } from "react-router-dom";
+import { BsCart3, BsSearch } from "react-icons/bs";
+import CartSection from "./CartSection"
 import useCartStore from "../../../store/useCartStore";
-import useNavBarStore from "../../../store/useNavBarStore";
-import { HiMenu } from "react-icons/hi";
 
 const PublicHeader = () => {
-   const { navBars, setNavBars } = useNavBarStore();
    const { carts } = useCartStore();
-   const [open, setOpen] = useState(false);
+   const [ open, setOpen ] = useState(false);
+   const [ isSearch, setIsSearch ] = useState(false);
 
-   const handleOpen = () => {
+   const handleClick = () => {
       setOpen(!open);
    };
-   const handleClose = () => {
-      setOpen(false);
-   };
+
+   const handleSearch = () => {
+      setIsSearch(true)
+   }
+
+   const handleBlur = () => {
+      setIsSearch(false)
+   }
+
+   const handleKeyUp = (e) => {
+      if(e.key == "Enter"){
+         setIsSearch(false)
+      }
+   }
    return (
-      <header className="fixed bg-white w-full h-20 flex items-center">
+      <header className="fixed bg-gray-50 w-full h-16 flex items-center border-b-2 border-gray-400">
          <Container>
             <div className="flex justify-between">
-               {/* logo */}
-               <Link to={"/"} className="font-heading text-3xl font-bold">
-                  Khawn
+               <Link to={"/"} className="font-heading text-xl/4 font-bold">
+                  MMS SOLUTIONS
+                  <p className="text-base text-gray-400">E-commerce</p>
                </Link>
-               {/* nav item to display at tablet and desktop */}
-               {/* <div className="hidden md:flex gap-5">
-                  {navBars.map((navBar) => (
-                     <Link key={navBar.id} to={navBar.url} onClick={() => setNavBars(navBar.id)} className={`${navBar.isActive ? "underline" : ""} hover:scale-105`}>
-                        {navBar.name}
-                     </Link>
-                  ))}
-               </div> */}
                <div className="flex items-center gap-2">
-                  <Link to={"/my-cart"} className="relative">
-                     <HiShoppingCart className="size-9" />
-                     <span className="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3 inline-block text-xs bg-red-500 overflow-hidden rounded-full text-white px-2 py-1">
+                  <div className="z-10">
+                     <BsSearch onClick={handleSearch} className={`${isSearch?"absolute":"border border-gray-400 rounded-lg"} size-8 p-2`} />
+                     <input type="text" onBlur={handleBlur} onKeyUp={handleKeyUp} className={`${isSearch?"":"hidden"} w-48 md:w-56 h-8 focus:ring-0 rounded-md py-1 px-2 pl-8`} />
+                  </div>
+                  <div onClick={handleClick} className="relative">
+                     <BsCart3 className="size-8 text-gray-50 bg-gray-950 p-2 rounded-lg" />
+                     <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 text-xs bg-red-500 rounded-full text-gray-50 size-5 flex justify-center items-center">
                         {carts.length}
                      </span>
-                  </Link>
-                  {/* nav btn to display at mobile */}
-                  {/* <div className="relative">
-                     <HiMenu onClick={handleOpen} className="size-9 md:hidden" />
-                     <div className={`absolute right-0 w-max ${open ? "block" : "hidden"} bg-gray-500 text-white text-center rounded overflow-hidden`}>
-                        {navBars.map((navBar) => (
-                           <Link
-                              key={navBar.id}
-                              to={navBar.url}
-                              onClick={handleClose}
-                              className="block border-b last:border-none px-10 py-1 hover:bg-gray-600"
-                           >
-                              {navBar.name}
-                           </Link>
-                        ))}
-                     </div>
-                  </div> */}
+                  </div>
                </div>
             </div>
          </Container>
-         <div onClick={handleClose} className={`absolute w-screen h-screen right-0 top-0 ${open ? "block" : "hidden"}`}></div>
+         <div onClick={handleClick} className={`${open?"block":"hidden"} absolute w-full h-screen top-0 z-20`}>
+            <CartSection handleClick={handleClick} />
+         </div>
+         <div onClick={handleBlur} className={`${isSearch?"block":"hidden"} absolute w-full h-screen top-0`}></div>
       </header>
    );
 };

@@ -30,12 +30,11 @@ const ProductDetailPage = () => {
    return (
       <Container>
          <Breadcrumb currentPageTitle="Product Detail" />
-         <div className="border border-black p-3 md:p-5 lg:p-10 mb-5">
+         <div className="border border-gray-950 p-3 md:p-5 lg:p-10 mb-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                <div className="flex justify-center items-center">
                   <img
                      src={currentProduct.image}
-                     alt={currentProduct.title}
                      className="w-2/3"
                   />
                </div>
@@ -55,14 +54,14 @@ const ProductDetailPage = () => {
                      ) ? (
                         <button
                            onClick={handleAddedBtn}
-                           className="text-sm border border-black px-3 py-1 bg-black text-white"
+                           className="text-sm border border-gray-950 px-3 py-1 bg-gray-950 text-gray-50"
                         >
                            Added
                         </button>
                      ) : (
                         <button
                            onClick={handleAddCartBtn}
-                           className="text-sm border border-black px-3 py-1"
+                           className="text-sm border border-gray-950 px-3 py-1"
                         >
                            Add Cart
                         </button>

@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 
 const Container = lazy(() => import("../features/public/components/Container"))
-const MyCartPage = lazy(() => import("../features/public/pages/MyCartPage"));
 const ProductPage = lazy(() => import("../features/public/pages/ProductPage"));
 const ProductDetailPage = lazy(() => import("../features/public/pages/ProductDetailPage"));
 
@@ -19,14 +18,6 @@ const publicRoute = [
       element: (
          <Suspense fallback={<Container>Loading...</Container>}>
             <ProductDetailPage />
-         </Suspense>
-      )
-   },
-   {
-      path: "my-cart",
-      element: (
-         <Suspense fallback={<Container>Loading...</Container>}>
-            <MyCartPage />
          </Suspense>
       )
    },

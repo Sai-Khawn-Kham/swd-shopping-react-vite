@@ -6,10 +6,10 @@ const Rating = ({ rate }) => {
    const length = 5;
    const numbers = Array.from({ length }, (_, index) => index + 1);
    return (
-      <div className="flex gap-1">
+      <div className="flex">
          {numbers.map((num) => (
-            <span key={num} className="text-yellow-300">
-               {num <= currentRate ? <HiStar /> : <HiOutlineStar />}
+            <span key={num} className="text-gray-500">
+               {num <= currentRate ? <HiStar className="size-3" /> : <HiOutlineStar className="size-3" />}
             </span>
          ))}
       </div>

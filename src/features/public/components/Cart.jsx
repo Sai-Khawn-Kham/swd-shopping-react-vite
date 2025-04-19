@@ -3,27 +3,30 @@ import Swal from "sweetalert2";
 import useProductStore from "../../../store/useProductStore";
 import useCartStore from "../../../store/useCartStore";
 import toast from "react-hot-toast";
+import { BsTrash } from "react-icons/bs";
 
 const Cart = ({ cart: { id, productId, quantity } }) => {
    const { products } = useProductStore();
    const { increaseQuantity, decreaseQuantity, removeCart } = useCartStore();
    const product = products.find((el) => el.id === productId);
    const cost = product.price * quantity;
+
    const handleIncreaseQuantity = () => {
       increaseQuantity(id);
    };
+
    const handleDecreaseQuantity = () => {
       if (quantity > 1) {
          decreaseQuantity(id);
       } else {
          Swal.fire({
-            title: "Are you sure?",
-            text: "Are you sure to remove this product from cart",
-            icon: "warning",
+            title: "Are you sure to delete?",
+            text: "You won't be able to revert this!",
+            icon: "question",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#444",
+            cancelButtonColor: "#888",
+            confirmButtonText: "Confirm",
          }).then((result) => {
             if (result.isConfirmed) {
                removeCart(id);
@@ -32,37 +35,52 @@ const Cart = ({ cart: { id, productId, quantity } }) => {
          });
       }
    };
+
+   const handleDelete = () => {
+      Swal.fire({
+         title: "Are you sure to delete?",
+         text: "You won't be able to revert this!",
+         icon: "question",
+         showCancelButton: true,
+         confirmButtonColor: "#444",
+         cancelButtonColor: "#888",
+         confirmButtonText: "Confirm",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            removeCart(id);
+            toast.success("Removed product from the cart")
+         }
+      });
+   }
    return (
-      <div className="border border-black py-2 grid grid-cols-5">
-         <div className="flex justify-center items-center">
-            <img src={product.image} alt={product.title} className="h-12" />
-         </div>
-         <div className="col-span-2 px-1">
+      <div className="h-32">
+         <div className="h-11"></div>
+         <div className="h-[5.25rem] border border-gray-950"></div>
+         <div className="p-2 flex flex-col gap-1 -mt-32 group">
+            <div className="flex justify-between items-end">
+               <img src={product.image} className="h-16" />
+               <BsTrash onClick={handleDelete} className="text-red-500 hidden group-hover:block" />
+            </div>
             <p className="line-clamp-1">{product.title}</p>
-            <p className="text-gray-500">Price: ${product.price}</p>
-         </div>
-         <div className="flex justify-center items-center px-1">
-            <div>
-               <p>Quantity</p>
-               <div className="flex gap-2">
+            <div className="text-xs flex justify-between items-center">
+               <p className="text-gray-500">${product.price}</p>
+               <div className="bg-gray-300 flex items-center gap-2">
                   <button
                      onClick={handleDecreaseQuantity}
-                     className="bg-black block text-center text-white px-1"
+                     className="block text-center px-1"
                   >
                      -
                   </button>
                   <p>{quantity}</p>
                   <button
                      onClick={handleIncreaseQuantity}
-                     className="bg-black block text-center text-white px-1"
+                     className="block text-center px-1"
                   >
                      +
                   </button>
                </div>
+               <p>{cost.toFixed(2)}</p>
             </div>
-         </div>
-         <div className="px-1 flex justify-center items-center">
-            <p>{cost.toFixed(2)}</p>
          </div>
       </div>
    );

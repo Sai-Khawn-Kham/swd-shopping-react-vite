@@ -4,16 +4,7 @@ import toast from "react-hot-toast";
 import Rating from "./Rating";
 import useCartStore from "../../../store/useCartStore";
 
-const ProductCard = ({
-   product: {
-      id,
-      title,
-      price,
-      image,
-      rating: { rate },
-      slug,
-   },
-}) => {
+const ProductCard = ({ product: { id, title, price, description, category, image, rating: { rate, count }, slug, }}) => {
    const { carts, addCart } = useCartStore();
    const navigate = useNavigate();
 
@@ -32,36 +23,46 @@ const ProductCard = ({
       };
       addCart(newCart);
    };
+
    const handleOpenDetail = () => {
       navigate(`/product-detail/${slug}`);
    };
    return (
-      <div
-         onClick={handleOpenDetail}
-         className="border border-slate-400 p-3 md:p-5 flex flex-col items-start gap-3 hover:border-slate-950"
-      >
-         <div className="w-full flex justify-center items-center">
-            <img src={image} className="h-40 " alt="" />
-         </div>
-         <p className="font-semibold line-clamp-1">{title}</p>
-         <Rating rate={rate} />
-         <div className="flex justify-between items-end w-full">
-            <p>${price}</p>
-            {carts.find((cart) => cart.productId === id) ? (
-               <button
-                  onClick={handleAddedBtn}
-                  className="text-sm border border-black px-3 py-1 bg-black text-white"
-               >
-                  Added
-               </button>
-            ) : (
-               <button
-                  onClick={handleAddCartBtn}
-                  className="text-sm border border-black px-3 py-1"
-               >
-                  Add Cart
-               </button>
-            )}
+      <div className="h-[21.6rem] group">
+         <div className="h-24"></div>
+         <div className="h-[15.6rem] border border-gray-400 group-hover:border-gray-700"></div>
+         <div className="p-3 -mt-[21.6rem]">
+            <div
+               onClick={handleOpenDetail}
+               className="flex flex-col items-start gap-2 overflow-hidden"
+            >
+               <img src={image} className="h-32" />
+               <p className="font-semibold line-clamp-1">{title}</p>
+               <p className="line-clamp-3 text-xs text-gray-500">{description}</p>
+               <div className="w-full flex justify-between items-center">
+                  <Rating rate={rate} />
+                  <div className="text-sm">
+                     ({rate} / {count})
+                  </div>
+               </div>
+               <hr className="w-full border-gray-500" />
+               <p className="font-medium">${price}</p>
+               {carts.find((cart) => cart.productId === id) ? (
+                  <button
+                     onClick={handleAddedBtn}
+                     className="w-full text-sm border border-gray-500 py-1 bg-gray-950 text-gray-50"
+                  >
+                     Added
+                  </button>
+               ) : (
+                  <button
+                     onClick={handleAddCartBtn}
+                     className="w-full text-sm border border-gray-500 py-1"
+                  >
+                     Add to Cart
+                  </button>
+               )}
+            </div>
          </div>
       </div>
    );
