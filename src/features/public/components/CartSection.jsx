@@ -21,23 +21,7 @@ const CartSection = ({ handleClick }) => {
 
    const handleOrdered = () => {
       Swal.fire({
-         title: "Are you sure?",
-         text: "Are you sure to cancel your order",
-         icon: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#444",
-         confirmButtonText: "Confirm",
-         cancelButtonColor: "#888",
-      }).then((result) => {
-         if (result.isConfirmed) {
-            setOrder(false)
-            toast.success("Canceled the order")
-         }
-      });
-   }
-   const handleOrder = () => {
-      Swal.fire({
-         title: "Are you ready to order?",
+         title: "Are you sure to cancel the order?",
          text: "You won't be able to revert this!",
          icon: "question",
          showCancelButton: true,
@@ -50,8 +34,26 @@ const CartSection = ({ handleClick }) => {
             toast.success("Canceled the order")
          }
       });
-      setOrder(true);
-      toast.success("Your order is pending");
+   }
+   const handleOrder = () => {
+      if(carts.length==0){
+         toast.error("You can't order with empty cart")
+      } else {
+         Swal.fire({
+            title: "Are you ready to order?",
+            text: "You won't be able to revert this!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#444",
+            confirmButtonText: "Confirm",
+            cancelButtonColor: "#888",
+         }).then((result) => {
+            if (result.isConfirmed) {
+               setOrder(true)
+               toast.success("Your order is pending");
+            }
+         });
+      }
    };
 
    const stopPropagation = (e) => {
