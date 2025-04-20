@@ -17,6 +17,7 @@ const useCartStore = create((set) => ({
       })),
    removeCart: (id) =>
       set((state) => ({ carts: state.carts.filter((el) => el.id !== id) })),
+   orderedCart: () => set((state) => ({carts: []}))
 }));
 
 export default useCartStore;

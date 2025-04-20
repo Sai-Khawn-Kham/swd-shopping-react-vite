@@ -3,12 +3,11 @@ import toast from "react-hot-toast";
 import Cart from "./Cart";
 import useCartStore from "../../../store/useCartStore";
 import useProductStore from "../../../store/useProductStore";
-import emptyCartImg from "../../../../public/assets/empty-cart.svg";
 import Swal from "sweetalert2";
 import { BsCart3, BsX } from "react-icons/bs";
 
 const CartSection = ({ handleClick }) => {
-   const { carts } = useCartStore();
+   const { carts, orderedCart } = useCartStore();
    const { products } = useProductStore();
    const total = carts.reduce((pv, cv) => {
       const price = products.find(({ id }) => id === cv.productId).price;
@@ -17,24 +16,7 @@ const CartSection = ({ handleClick }) => {
    }, 0);
    const tax = total * 0.05;
    const netTotal = total + tax;
-   const [order, setOrder] = useState(false);
 
-   const handleOrdered = () => {
-      Swal.fire({
-         title: "Are you sure to cancel the order?",
-         text: "You won't be able to revert this!",
-         icon: "question",
-         showCancelButton: true,
-         confirmButtonColor: "#444",
-         confirmButtonText: "Confirm",
-         cancelButtonColor: "#888",
-      }).then((result) => {
-         if (result.isConfirmed) {
-            setOrder(false)
-            toast.success("Canceled the order")
-         }
-      });
-   }
    const handleOrder = () => {
       if(carts.length==0){
          toast.error("You can't order with empty cart")
@@ -49,8 +31,13 @@ const CartSection = ({ handleClick }) => {
             cancelButtonColor: "#888",
          }).then((result) => {
             if (result.isConfirmed) {
-               setOrder(true)
-               toast.success("Your order is pending");
+               orderedCart()
+               Swal.fire({
+                  title: "Order Confirmation",
+                  text: "Your order will be processed and shipped within 3 business days. You will receive another email with tracking information once your order has been dispatched",
+                  icon: "success",
+                  confirmButtonColor: "#444",
+               })
             }
          });
       }
@@ -79,7 +66,7 @@ const CartSection = ({ handleClick }) => {
             {carts.length === 0 ? (
                <div className="h-full flex flex-col justify-center items-center">
                   <img
-                     src={emptyCartImg}
+                     src="/assets/empty-cart.svg"
                      className="w-[200px]"
                   />
                   <p className="text-gray-600">There is no item yet!</p>
@@ -104,21 +91,12 @@ const CartSection = ({ handleClick }) => {
                </div>
             </div>
             <div className="text-end">
-               {order ? (
-                  <div
-                     onClick={handleOrdered}
-                     className={`border border-gray-950 px-4 py-1 inline-block bg-gray-950 text-gray-50`}
-                  >
-                     Order Now
-                  </div>
-               ) : (
-                  <div
-                     onClick={handleOrder}
-                     className={`border border-gray-950 px-4 py-1 inline-block`}
-                  >
-                     Order Now
-                  </div>
-               )}
+               <button
+                  onClick={handleOrder}
+                  className={`border border-gray-950 px-4 py-1 inline-block`}
+               >
+                  Order Now
+               </button>
             </div>
          </div>
       </div>
