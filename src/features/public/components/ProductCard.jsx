@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Rating from "./Rating";
 import useCartStore from "../../../store/useCartStore";
 
-const ProductCard = ({ product: { id, title, price, description, category, image, rating: { rate, count }, slug, }}) => {
+const ProductCard = ({ product: { category, description, id, image, price, rating: { rate, count }, title }}) => {
    const { carts, addCart } = useCartStore();
    const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const ProductCard = ({ product: { id, title, price, description, category, image
    };
 
    const handleOpenDetail = () => {
-      navigate(`/product-detail/${slug}`);
+      navigate(`/product-detail/${id}`);
    };
    return (
       <div className="h-[21.6rem] group">
