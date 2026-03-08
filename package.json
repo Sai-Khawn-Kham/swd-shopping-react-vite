@@ -13,7 +13,7 @@
     "animate.css": "^4.1.1",
     "axios": "^1.7.9",
     "flowbite": "^2.5.2",
-    "html2pdf.js": "^0.10.2",
+    "html2pdf.js": "^0.14.0",
     "ldrs": "^1.0.2",
     "lodash": "^4.17.21",
     "print-js": "^1.6.0",
